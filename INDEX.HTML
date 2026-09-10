@@ -1,0 +1,1671 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CHICO — arquivo confidencial</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,500;1,500;1,700&display=swap');
+
+:root{
+    --wine:#6f1028;
+    --dark:#16080d;
+    --cream:#f4eadb;
+    --red:#a51d3c;
+    --pink:#d77a8e;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:var(--cream);
+    color:var(--dark);
+    font-family:'DM Mono',monospace;
+    overflow-x:hidden;
+}
+
+/* TEXTURA */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:999;
+    pointer-events:none;
+    opacity:.09;
+
+    background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
+}
+
+/* CURSORES DECORATIVOS */
+
+.cursor-text{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    z-index:1000;
+
+    width:70px;
+    height:70px;
+
+    border-radius:50%;
+
+    background:var(--wine);
+    color:var(--cream);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:10px;
+    text-align:center;
+
+    transform:rotate(-12deg);
+
+    box-shadow:5px 5px 0 #241016;
+}
+
+/* NAV */
+
+nav{
+    position:fixed;
+    z-index:100;
+
+    top:0;
+    left:0;
+
+    width:100%;
+
+    padding:20px 35px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    mix-blend-mode:multiply;
+}
+
+.logo{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:30px;
+    letter-spacing:3px;
+}
+
+.logo span{
+    color:var(--wine);
+}
+
+nav ul{
+    list-style:none;
+    display:flex;
+    gap:25px;
+}
+
+nav a{
+    color:var(--dark);
+    text-decoration:none;
+    font-size:11px;
+    text-transform:uppercase;
+}
+
+nav a:hover{
+    color:var(--wine);
+}
+
+/* HERO */
+
+.hero{
+    min-height:100vh;
+    position:relative;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    overflow:hidden;
+
+    background:var(--cream);
+}
+
+.hero::before{
+    content:"CHICO";
+
+    position:absolute;
+
+    font-family:'Bebas Neue',sans-serif;
+
+    font-size:clamp(180px,30vw,450px);
+
+    line-height:.7;
+
+    color:var(--wine);
+
+    opacity:.08;
+
+    transform:rotate(-8deg);
+}
+
+.hero-title{
+    position:relative;
+    z-index:2;
+
+    text-align:center;
+}
+
+.kicker{
+    display:inline-block;
+
+    padding:7px 13px;
+
+    border:1px solid var(--dark);
+
+    font-size:10px;
+
+    transform:rotate(-3deg);
+
+    margin-bottom:20px;
+}
+
+h1{
+    font-family:'Bebas Neue',sans-serif;
+
+    font-size:clamp(100px,19vw,250px);
+
+    line-height:.72;
+
+    letter-spacing:-3px;
+
+    color:var(--wine);
+
+    transform:rotate(-4deg);
+
+    text-shadow:
+        7px 7px 0 rgba(111,16,40,.13);
+}
+
+.hero-sub{
+    margin-top:45px;
+
+    font-family:'Playfair Display',serif;
+
+    font-style:italic;
+
+    font-size:clamp(20px,3vw,32px);
+
+    transform:rotate(2deg);
+}
+
+/* ELEMENTOS */
+
+.sticker{
+    position:absolute;
+
+    background:var(--wine);
+    color:var(--cream);
+
+    padding:12px 17px;
+
+    font-size:10px;
+
+    text-transform:uppercase;
+
+    box-shadow:6px 6px 0 var(--dark);
+}
+
+.s1{
+    top:24%;
+    left:8%;
+    transform:rotate(-11deg);
+}
+
+.s2{
+    right:8%;
+    top:30%;
+    transform:rotate(8deg);
+}
+
+.s3{
+    bottom:17%;
+    left:13%;
+    transform:rotate(5deg);
+}
+
+.circle{
+    position:absolute;
+
+    width:180px;
+    height:180px;
+
+    border:2px solid var(--wine);
+
+    border-radius:50%;
+
+    right:13%;
+    bottom:10%;
+}
+
+/* MARQUEE */
+
+.marquee{
+    background:var(--wine);
+    color:var(--cream);
+
+    padding:13px 0;
+
+    overflow:hidden;
+
+    white-space:nowrap;
+
+    transform:rotate(-2deg) scale(1.03);
+}
+
+.marquee div{
+    display:inline-block;
+
+    font-family:'Bebas Neue',sans-serif;
+
+    font-size:30px;
+
+    letter-spacing:3px;
+
+    animation:move 15s linear infinite;
+}
+
+@keyframes move{
+    to{
+        transform:translateX(-50%);
+    }
+}
+
+/* INTRO */
+
+.intro{
+    min-height:90vh;
+
+    display:grid;
+    grid-template-columns:1fr 1fr;
+
+    align-items:center;
+
+    gap:80px;
+
+    padding:130px 9%;
+}
+
+.number{
+    font-family:'Bebas Neue',sans-serif;
+
+    color:var(--wine);
+
+    font-size:180px;
+
+    line-height:.7;
+}
+
+.intro h2{
+    font-family:'Playfair Display',serif;
+
+    font-size:clamp(40px,6vw,75px);
+
+    font-weight:500;
+
+    line-height:.95;
+
+    margin-bottom:30px;
+}
+
+.intro h2 em{
+    color:var(--wine);
+}
+
+.intro p{
+    max-width:500px;
+
+    font-size:14px;
+
+    line-height:2;
+
+    color:#57323b;
+}
+
+/* FEATURES */
+
+.features{
+    background:var(--dark);
+    color:var(--cream);
+
+    padding:120px 8%;
+}
+
+.section-label{
+    color:var(--pink);
+
+    font-size:11px;
+
+    text-transform:uppercase;
+
+    letter-spacing:3px;
+
+    margin-bottom:15px;
+}
+
+.features h2{
+    font-family:'Bebas Neue',sans-serif;
+
+    color:var(--cream);
+
+    font-size:clamp(60px,10vw,130px);
+
+    line-height:.8;
+
+    margin-bottom:70px;
+}
+
+.feature-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    border-top:1px solid #6c3b48;
+
+    border-left:1px solid #6c3b48;
+}
+
+.feature{
+    min-height:300px;
+
+    padding:30px;
+
+    border-right:1px solid #6c3b48;
+    border-bottom:1px solid #6c3b48;
+
+    position:relative;
+
+    transition:.4s;
+}
+
+.feature:hover{
+    background:var(--wine);
+
+    transform:translateY(-8px);
+}
+
+.feature-number{
+    color:var(--pink);
+
+    font-size:11px;
+
+    margin-bottom:70px;
+}
+
+.feature h3{
+    font-family:'Playfair Display',serif;
+
+    font-size:30px;
+
+    font-weight:500;
+
+    margin-bottom:15px;
+}
+
+.feature p{
+    color:#c5adb3;
+
+    font-size:12px;
+
+    line-height:1.8;
+}
+
+/* CARTA */
+
+.letter-section{
+    padding:150px 10%;
+
+    position:relative;
+}
+
+.letter{
+    max-width:850px;
+
+    margin:auto;
+
+    padding:70px;
+
+    background:#fffaf1;
+
+    border:1px solid #c9b8a5;
+
+    box-shadow:
+        15px 15px 0 var(--wine);
+
+    transform:rotate(1deg);
+}
+
+.letter-top{
+    display:flex;
+    justify-content:space-between;
+
+    margin-bottom:50px;
+
+    font-size:10px;
+
+    color:#765b63;
+}
+
+.letter h2{
+    font-family:'Playfair Display',serif;
+
+    font-size:clamp(40px,6vw,70px);
+
+    font-weight:500;
+
+    color:var(--wine);
+
+    margin-bottom:30px;
+}
+
+.letter p{
+    font-family:'Playfair Display',serif;
+
+    font-size:17px;
+
+    line-height:2;
+
+    color:#40242b;
+
+    margin-bottom:18px;
+}
+
+.signature{
+    text-align:right;
+
+    margin-top:40px;
+
+    font-family:'Playfair Display',serif;
+
+    font-style:italic;
+
+    font-size:25px;
+
+    color:var(--wine);
+}
+
+/* GALERIA */
+
+.gallery-section{
+    padding:120px 6%;
+
+    background:#e6d4c3;
+}
+
+.gallery-title{
+    display:flex;
+    align-items:end;
+    justify-content:space-between;
+
+    margin-bottom:60px;
+}
+
+.gallery-title h2{
+    font-family:'Bebas Neue',sans-serif;
+
+    font-size:clamp(70px,12vw,150px);
+
+    color:var(--wine);
+
+    line-height:.7;
+}
+
+.gallery-title span{
+    max-width:220px;
+
+    font-size:11px;
+
+    line-height:1.7;
+}
+
+.gallery{
+    display:grid;
+
+    grid-template-columns:
+        1.3fr .7fr 1fr;
+
+    gap:18px;
+}
+
+.photo{
+    min-height:350px;
+
+    border:8px solid var(--cream);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:70px;
+
+    position:relative;
+
+    transition:.4s;
+}
+
+.photo:hover{
+    transform:rotate(-2deg) scale(1.02);
+}
+
+.photo small{
+    position:absolute;
+
+    bottom:12px;
+    left:15px;
+
+    font-size:9px;
+
+    background:var(--dark);
+    color:white;
+
+    padding:6px 9px;
+}
+
+.p1{
+    background:#8c2943;
+}
+
+.p2{
+    background:#c07883;
+}
+
+.p3{
+    background:#5a1328;
+}
+
+/* FINAL */
+
+.final{
+    min-height:90vh;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    background:var(--wine);
+
+    color:var(--cream);
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.final::before{
+    content:"CHICO";
+
+    position:absolute;
+
+    font-family:'Bebas Neue',sans-serif;
+
+    font-size:35vw;
+
+    opacity:.07;
+
+    white-space:nowrap;
+}
+
+.final-content{
+    position:relative;
+    z-index:2;
+}
+
+.final small{
+    letter-spacing:5px;
+
+    color:#e4a6b3;
+}
+
+.final h2{
+    font-family:'Playfair Display',serif;
+
+    font-size:clamp(50px,8vw,110px);
+
+    font-weight:500;
+
+    line-height:.9;
+
+    margin:25px 0;
+}
+
+.final h2 em{
+    display:block;
+}
+
+.final p{
+    max-width:500px;
+
+    margin:auto;
+
+    color:#e5cbd1;
+
+    line-height:1.8;
+
+    font-size:13px;
+}
+
+/* BOTÃO */
+
+.back{
+    display:inline-block;
+
+    margin-top:35px;
+
+    padding:15px 25px;
+
+    border:1px solid var(--cream);
+
+    color:var(--cream);
+
+    text-decoration:none;
+
+    font-size:11px;
+
+    transition:.3s;
+}
+
+.back:hover{
+    background:var(--cream);
+    color:var(--wine);
+}
+
+/* FOOTER */
+
+footer{
+    background:#100509;
+
+    color:#80646c;
+
+    padding:35px;
+
+    text-align:center;
+
+    font-size:10px;
+}
+
+footer strong{
+    color:#d98498;
+}
+
+/* RESPONSIVO */
+
+@media(max-width:800px){
+
+    nav{
+        padding:18px;
+    }
+
+    nav ul{
+        display:none;
+    }
+
+    .sticker,
+    .circle{
+        display:none;
+    }
+
+    .intro{
+        grid-template-columns:1fr;
+
+        gap:30px;
+
+        padding:100px 8%;
+    }
+
+    .number{
+        font-size:100px;
+    }
+
+    .feature-grid{
+        grid-template-columns:1fr;
+    }
+
+    .letter{
+        padding:35px 25px;
+
+        box-shadow:
+            8px 8px 0 var(--wine);
+    }
+
+    .gallery-title{
+        display:block;
+    }
+
+    .gallery-title span{
+        margin-top:30px;
+        display:block;
+    }
+
+    .gallery{
+        grid-template-columns:1fr;
+    }
+
+    .photo{
+        min-height:280px;
+    }
+
+    .cursor-text{
+        display:none;
+    }
+}
+
+@media(max-width:500px){
+
+    h1{
+        font-size:90px;
+    }
+
+    .hero-sub{
+        font-size:20px;
+    }
+
+    .letter p{
+        font-size:15px;
+    }
+}
+/* ============================= */
+/* CHICOS — UNDERGROUND ARCHIVE */
+/* ============================= */
+
+.chicos{
+    position:relative;
+    overflow:hidden;
+
+    padding:150px 7%;
+
+    background:
+        radial-gradient(circle at 15% 20%, #8d1735 0%, transparent 25%),
+        radial-gradient(circle at 85% 80%, #3b0b1b 0%, transparent 30%),
+        #0d0508;
+
+    color:var(--cream);
+}
+
+.chicos::before{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,.025) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.025) 1px,
+            transparent 1px
+        );
+
+    background-size:40px 40px;
+
+    pointer-events:none;
+}
+
+.chicos::after{
+    content:"";
+
+    position:absolute;
+    width:600px;
+    height:600px;
+
+    border:1px solid rgba(215,122,142,.2);
+    border-radius:50%;
+
+    right:-250px;
+    top:-200px;
+
+    box-shadow:
+        0 0 0 30px rgba(215,122,142,.03),
+        0 0 0 70px rgba(215,122,142,.02);
+}
+
+
+/* HEADER */
+
+.chicos-header{
+    position:relative;
+    z-index:2;
+
+    display:grid;
+    grid-template-columns:1fr 2fr 1fr;
+
+    align-items:end;
+
+    margin-bottom:90px;
+}
+
+.chicos-index{
+    align-self:start;
+
+    color:var(--pink);
+
+    font-size:10px;
+    letter-spacing:4px;
+
+    writing-mode:vertical-rl;
+
+    border-left:1px solid var(--pink);
+
+    padding-left:12px;
+}
+
+.chicos-header h2{
+    font-family:'Bebas Neue',sans-serif;
+
+    font-size:clamp(100px,16vw,230px);
+
+    line-height:.68;
+
+    letter-spacing:-5px;
+
+    color:var(--cream);
+
+    transform:rotate(-3deg);
+
+    text-shadow:
+        5px 5px 0 var(--wine),
+        10px 10px 0 rgba(165,29,60,.25);
+}
+
+.chicos-header h2 em{
+    color:var(--red);
+
+    font-style:normal;
+
+    display:block;
+
+    transform:translateX(70px);
+}
+
+.chicos-header p{
+    justify-self:end;
+
+    max-width:140px;
+
+    color:#a98b93;
+
+    font-size:10px;
+
+    line-height:1.8;
+
+    text-transform:uppercase;
+
+    letter-spacing:2px;
+
+    border-top:1px solid #633441;
+
+    padding-top:12px;
+}
+
+
+/* GRID */
+
+.chicos-grid{
+    position:relative;
+    z-index:3;
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr 1fr;
+
+    gap:25px;
+
+    align-items:start;
+}
+
+
+/* CARDS */
+
+.chico-card{
+    position:relative;
+
+    transition:.5s cubic-bezier(.2,.8,.2,1);
+}
+
+.chico-card:nth-child(2){
+    margin-top:90px;
+}
+
+.chico-card:nth-child(3){
+    margin-top:25px;
+}
+
+.chico-card:hover{
+    transform:translateY(-15px) rotate(-1deg);
+}
+
+
+/* PHOTO */
+
+.chico-photo{
+    position:relative;
+
+    height:500px;
+
+    overflow:hidden;
+
+    background:#190910;
+
+    border:1px solid #633441;
+
+    box-shadow:
+        10px 10px 0 #280b15,
+        15px 15px 0 rgba(111,16,40,.35);
+}
+
+.chico-card:nth-child(2) .chico-photo{
+    box-shadow:
+        -10px 12px 0 #280b15,
+        -15px 17px 0 rgba(111,16,40,.35);
+}
+
+.chico-photo::after{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(111,16,40,.2),
+            transparent 45%,
+            rgba(0,0,0,.65)
+        );
+
+    pointer-events:none;
+}
+
+.chico-photo img{
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    filter:
+        grayscale(100%)
+        contrast(1.25)
+        brightness(.78);
+
+    transform:scale(1.03);
+
+    transition:.7s cubic-bezier(.2,.8,.2,1);
+}
+
+.chico-card:hover img{
+    filter:
+        grayscale(15%)
+        contrast(1.15)
+        brightness(.9);
+
+    transform:scale(1.1);
+}
+
+
+/* NUMERAÇÃO */
+
+.photo-tag{
+    position:absolute;
+
+    z-index:4;
+
+    top:15px;
+    left:15px;
+
+    padding:8px 12px;
+
+    background:var(--cream);
+    color:var(--dark);
+
+    font-size:9px;
+    font-weight:500;
+
+    letter-spacing:2px;
+
+    transform:rotate(-3deg);
+}
+
+.chico-card:nth-child(2) .photo-tag{
+    background:var(--wine);
+    color:var(--cream);
+
+    transform:rotate(4deg);
+}
+
+
+/* INFO */
+
+.chico-info{
+    display:flex;
+
+    justify-content:space-between;
+    align-items:center;
+
+    padding:18px 3px;
+
+    border-bottom:1px solid #5d3440;
+}
+
+.chico-info span{
+    color:var(--pink);
+
+    font-size:9px;
+
+    letter-spacing:2px;
+}
+
+.chico-info h3{
+    font-family:'Bebas Neue',sans-serif;
+
+    font-size:28px;
+
+    letter-spacing:2px;
+
+    color:var(--cream);
+}
+
+
+/* TEXTO GIGANTE DE FUNDO */
+
+.chicos-stamp{
+    position:absolute;
+
+    z-index:1;
+
+    right:-40px;
+    bottom:-120px;
+
+    font-family:'Bebas Neue',sans-serif;
+
+    font-size:180px;
+
+    line-height:.7;
+
+    color:transparent;
+
+    -webkit-text-stroke:
+        1px rgba(215,122,142,.08);
+
+    transform:rotate(-8deg);
+
+    pointer-events:none;
+}
+
+
+/* LINHA DECORATIVA */
+
+.chicos-grid::before{
+    content:"";
+
+    position:absolute;
+
+    top:-35px;
+    left:0;
+
+    width:100%;
+
+    border-top:1px solid #633441;
+}
+
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+    .chicos{
+        padding:100px 7%;
+    }
+
+    .chicos-header{
+        display:block;
+
+        margin-bottom:60px;
+    }
+
+    .chicos-index{
+        display:block;
+
+        writing-mode:initial;
+
+        border-left:0;
+        border-bottom:1px solid var(--pink);
+
+        padding:0 0 10px;
+
+        margin-bottom:40px;
+    }
+
+    .chicos-header h2{
+        font-size:110px;
+    }
+
+    .chicos-header h2 em{
+        transform:translateX(25px);
+    }
+
+    .chicos-header p{
+        margin-top:35px;
+    }
+
+    .chicos-grid{
+        grid-template-columns:1fr;
+    }
+
+    .chico-card:nth-child(2),
+    .chico-card:nth-child(3){
+        margin-top:0;
+    }
+
+    .chico-photo{
+        height:450px;
+    }
+
+    .chicos-stamp{
+        font-size:100px;
+    }
+}
+
+@media(max-width:500px){
+
+    .chicos-header h2{
+        font-size:90px;
+    }
+
+    .chico-photo{
+        height:380px;
+    }
+
+    .chico-info h3{
+        font-size:23px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="cursor-text">
+    THIS IS<br>
+    FOR CHICO
+</div>
+
+
+<!-- NAV -->
+
+<nav>
+
+    <div class="logo">
+        C<span>HICO</span>.
+    </div>
+
+    <ul>
+        <li>
+            <a href="#inicio">01 — início</a>
+        </li>
+
+        <li>
+            <a href="#historia">02 — história</a>
+        </li>
+
+        <li>
+            <a href="#carta">03 — carta</a>
+        </li>
+
+        <li>
+            <a href="#memorias">04 — arquivo</a>
+        </li>
+    </ul>
+
+</nav>
+
+
+<!-- HERO -->
+
+<section class="hero" id="inicio">
+
+    <div class="sticker s1">
+        edição especial
+    </div>
+
+    <div class="sticker s2">
+        100% chico
+    </div>
+
+    <div class="sticker s3">
+        arquivo nº 001
+    </div>
+
+    <div class="circle"></div>
+
+    <div class="hero-title">
+
+        <div class="kicker">
+            UMA HOMENAGEM (NÃO) OFICIAL
+        </div>
+
+        <h1>
+            CHICO
+        </h1>
+
+        <div class="hero-sub">
+            algumas pessoas simplesmente deixam marca.
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- MARQUEE -->
+
+<div class="marquee">
+    <div>
+        CHICO ✦ CHICO ✦ CHICO ✦ CHICO ✦
+        CHICO ✦ CHICO ✦ CHICO ✦ CHICO ✦
+        CHICO ✦ CHICO ✦ CHICO ✦ CHICO ✦
+    </div>
+</div>
+
+<!-- CHICOS -->
+
+<section class="chicos" id="chicos">
+
+    <div class="chicos-header">
+        <span class="chicos-index">DOSSIÊ / 003</span>
+
+        <h2>
+            OS<br>
+            <em>CHICOS</em>
+        </h2>
+
+        <p>
+            Três registros.<br>
+            Uma mesma lenda.
+        </p>
+    </div>
+
+    <div class="chicos-grid">
+
+        <article class="chico-card chico-1">
+            <div class="chico-photo">
+                <img src="IMG/Chico_1.jpg" alt="Chico 01">
+                <span class="photo-tag">CHICO_01</span>
+            </div>
+
+            <div class="chico-info">
+                <span>ARQUIVO 001</span>
+                <h3>O ORIGINAL</h3>
+            </div>
+        </article>
+
+
+        <article class="chico-card chico-2">
+            <div class="chico-photo">
+                <img src="IMG/chico2.webp" alt="Chico 02">
+                <span class="photo-tag">CHICO_02</span>
+            </div>
+
+            <div class="chico-info">
+                <span>ARQUIVO 002</span>
+                <h3>O CAOS</h3>
+            </div>
+        </article>
+
+
+        <article class="chico-card chico-3">
+            <div class="chico-photo">
+                <img src="IMG/chico3.jpg" alt="Chico 03">
+                <span class="photo-tag">CHICO_03</span>
+            </div>
+
+            <div class="chico-info">
+                <span>ARQUIVO 003</span>
+                <h3>A LENDA</h3>
+            </div>
+        </article>
+
+    </div>
+
+    <div class="chicos-stamp">
+        CHICO<br>
+        CHICO<br>
+        CHICO
+    </div>
+
+</section>
+
+<!-- INTRO -->
+
+<section class="intro" id="historia">
+
+    <div class="number">
+        01
+    </div>
+
+    <div>
+
+        <h2>
+            Não é apenas um nome.
+            <em>É uma história.</em>
+        </h2>
+
+        <p>
+            Existem pessoas que aparecem na nossa vida
+            e simplesmente passam. E existem aquelas que,
+            de alguma forma, conseguem transformar
+            momentos comuns em memórias que a gente
+            nunca esquece.
+        </p>
+
+        <br>
+
+        <p>
+            Este site é uma pequena tentativa de colocar
+            em palavras — e em pixels — o quanto uma
+            pessoa pode ser importante.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- FEATURES -->
+
+<section class="features">
+
+    <div class="section-label">
+        02 — características do indivíduo
+    </div>
+
+    <h2>
+        POR QUE<br>
+        CHICO?
+    </h2>
+
+
+    <div class="feature-grid">
+
+        <div class="feature">
+
+            <div class="feature-number">
+                001
+            </div>
+
+            <h3>
+                As histórias
+            </h3>
+
+            <p>
+                Sempre existe uma história envolvendo o Chico.
+                E normalmente ela começa de um jeito normal
+                e termina completamente diferente.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-number">
+                002
+            </div>
+
+            <h3>
+                As risadas
+            </h3>
+
+            <p>
+                Porque algumas amizades são construídas
+                em conversas aleatórias, piadas internas
+                e momentos que ninguém mais entenderia.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-number">
+                003
+            </div>
+
+            <h3>
+                A presença
+            </h3>
+
+            <p>
+                No final, talvez seja isso que importa:
+                saber que existe alguém que torna os dias
+                um pouco mais interessantes.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-number">
+                004
+            </div>
+
+            <h3>
+                O caos
+            </h3>
+
+            <p>
+                Algumas pessoas trazem paz.
+                Outras trazem histórias.
+                O Chico provavelmente traz os dois.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-number">
+                005
+            </div>
+
+            <h3>
+                A parceria
+            </h3>
+
+            <p>
+                Para os dias bons, para os ruins e,
+                principalmente, para aquelas ideias
+                que provavelmente não deveriam acontecer.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-number">
+                006
+            </div>
+
+            <h3>
+                Simplesmente Chico
+            </h3>
+
+            <p>
+                Não precisa explicar muito.
+                Algumas pessoas são únicas justamente
+                porque não existe outra igual.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CARTA -->
+
+<section class="letter-section" id="carta">
+
+    <div class="letter">
+
+        <div class="letter-top">
+            <span>ARQUIVO CONFIDENCIAL</span>
+            <span>09 / 09 / 2026</span>
+        </div>
+
+        <h2>
+            Ei, Chico.
+        </h2>
+
+        <p>
+            Eu poderia simplesmente mandar uma mensagem
+            dizendo “valeu por ser meu amigo”.
+        </p>
+
+        <p>
+            Mas isso seria simples demais.
+        </p>
+
+        <p>
+            Então resolvi fazer um site inteiro.
+            Porque aparentemente essa era a maneira
+            mais normal de demonstrar amizade.
+        </p>
+
+        <p>
+            Queria que você soubesse que eu valorizo muito
+            todos os momentos, conversas, risadas e histórias
+            que a gente acumulou.
+        </p>
+
+        <p>
+            Talvez daqui a alguns anos a gente olhe para trás
+            e nem lembre de metade das coisas que aconteceram.
+            Mas espero que a gente ainda lembre de como era
+            bom estar por perto.
+        </p>
+
+        <p>
+            Enfim, Chico: obrigado por ser você.
+            E parabéns, você agora oficialmente tem
+            um site bordô dedicado a você.
+        </p>
+
+        <div class="signature">
+            Com carinho,<br>
+            seu amigo.
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- MEMÓRIAS -->
+
+<section class="gallery-section" id="memorias">
+
+    <div class="gallery-title">
+
+        <h2>
+            ARQUIVO<br>
+            VISUAL
+        </h2>
+
+        <span>
+            Substitua os emojis abaixo pelas fotos
+            de vocês para deixar o site ainda mais
+            pessoal.
+        </span>
+
+    </div>
+
+
+    <div class="gallery">
+
+        <div class="photo p1">
+            🥂
+            <small>MEMÓRIA 001</small>
+        </div>
+
+        <div class="photo p2">
+            📸
+            <small>MEMÓRIA 002</small>
+        </div>
+
+        <div class="photo p3">
+            🕶️
+            <small>MEMÓRIA 003</small>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FINAL -->
+
+<section class="final">
+
+    <div class="final-content">
+
+        <small>
+            FIM DO ARQUIVO
+        </small>
+
+        <h2>
+            Algumas amizades
+            <em>merecem uma página inteira.</em>
+        </h2>
+
+        <p>
+            Esta foi feita especialmente para você, Chico.
+            Que venham muitas outras histórias.
+        </p>
+
+        <a href="#inicio" class="back">
+            ↑ VOLTAR AO INÍCIO
+        </a>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    ARQUIVO CHICO © 2026
+    <br><br>
+    Feito com <strong>bordô, amizade e um pouco de caos.</strong>
+
+</footer>
+
+</body>
+</html>
